@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtualenv
+venv/
+
+# VSCode
+.vscode/
+
+# Environment variables
+.env
+.env.*
+
+# OS
+.DS_Store
+
+# FastAPI/Migrations
+__pycache__/
+*.sqlite3
