@@ -15,3 +15,4 @@ class Product(Base):
     tags = Column(Text, nullable=True)
     launch_date = Column(Date, nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+    auto_tags = Column(ARRAY(String)) 
