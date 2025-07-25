@@ -1,5 +1,7 @@
-from sqlalchemy import Column, Integer, String, Text, Date, DateTime, func
+from sqlalchemy import Column, Integer, String, Text, Date, DateTime, func, ARRAY
 from sqlalchemy.ext.declarative import declarative_base
+
+auto_tags = Column(ARRAY(String))
 
 Base = declarative_base()
 

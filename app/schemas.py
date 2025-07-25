@@ -1,13 +1,13 @@
 from pydantic import BaseModel
 from datetime import date
-from typing import Optional
+from typing import Optional, List
 
 class ProductBase(BaseModel):
     name: str
     description: str
     url: str
-    tags: Optional[str] = None
     launch_date: date
+    auto_tags: Optional[List[str]] = None
 
 class ProductCreate(ProductBase):
     pass

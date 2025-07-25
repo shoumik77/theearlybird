@@ -1,12 +1,10 @@
+import requests
 import feedparser
 from datetime import datetime
 from app.schemas import ProductCreate
 from app.crud import create_product, get_product_by_url
+from app.nlp import extract_tags
 
-import requests
-import feedparser
-from datetime import datetime
-from .schemas import ProductCreate
 
 def parse_product_hunt_feed():
     url = "https://www.producthunt.com/feed"
@@ -26,11 +24,13 @@ def parse_product_hunt_feed():
         product_url = entry.link
         pub_date = datetime(*entry.published_parsed[:6])
 
+        tags = extract_tags(description)
+
         products.append(ProductCreate(
             name=name,
             description=description,
             url=product_url,
-            tage=None,
+            auto_tags=tags,
             launch_date=pub_date.date()
         ))
 
@@ -43,9 +43,6 @@ def sync_new_products(db):
     for product in products:
         if get_product_by_url(db, product.url) is None:
             create_product(db, product)
-
             new_count += 1
     
     print(f"Synced {new_count} new products")
-            
-
